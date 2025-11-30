@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: movie-recommendation-api
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn movie_recommendation.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: movie_recommendation.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: TMDB_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
